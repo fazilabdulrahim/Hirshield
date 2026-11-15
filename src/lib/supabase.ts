@@ -1,7 +1,11 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
+const configuredSupabaseUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined;
+const configuredSupabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
+
+export const isSupabaseConfigured = Boolean(configuredSupabaseUrl && configuredSupabaseAnonKey);
+const supabaseUrl = configuredSupabaseUrl || 'https://missing-supabase-configuration.invalid';
+const supabaseAnonKey = configuredSupabaseAnonKey || 'missing-anon-key';
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {

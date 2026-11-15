@@ -10,6 +10,7 @@ import { HistoryPage } from '@/pages/HistoryPage';
 import { ReportPage } from '@/pages/ReportPage';
 import { ProfilePage } from '@/pages/ProfilePage';
 import { LoadingPage } from '@/components/ui';
+import { isSupabaseConfigured } from '@/lib/supabase';
 import type { AnalysisResult } from '@/types';
 
 type AppView =
@@ -124,10 +125,28 @@ function AppContent() {
 }
 
 function App() {
+  if (!isSupabaseConfigured) {
+    return <ConfigurationNotice />;
+  }
+
   return (
     <AuthProvider>
       <AppContent />
     </AuthProvider>
+  );
+}
+
+function ConfigurationNotice() {
+  return (
+    <main className="min-h-screen flex items-center justify-center bg-slate-950 px-6">
+      <section className="max-w-lg w-full rounded-2xl border border-white/10 bg-white/5 p-8 text-center text-white shadow-2xl">
+        <h1 className="text-2xl font-bold tracking-tight">HIRESHIELD is almost ready</h1>
+        <p className="mt-3 text-sm leading-relaxed text-slate-400">
+          The deployment is missing its database connection settings. Add the public Supabase
+          settings to the Vercel project, then redeploy to load the full application.
+        </p>
+      </section>
+    </main>
   );
 }
 

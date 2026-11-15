@@ -38,7 +38,7 @@ export function HomePage({ onGetStarted, onLearnMore, onLogin }: HomePageProps) 
             {/* Logo */}
             <div className="flex items-center gap-2.5 shrink-0">
               <Logo size={32} />
-              <span className="font-bold text-slate-900 tracking-tight text-lg hidden sm:block">HIRESHIELD</span>
+              <span className="font-bold text-slate-900 tracking-tight text-base sm:text-lg">HIRESHIELD</span>
             </div>
 
             {/* Desktop nav links */}
